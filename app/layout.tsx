@@ -2,6 +2,8 @@ import type React from "react"
 import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import CustomCursor from "@/components/custom-cursor"
+import FloatingTools from "@/components/floating-tools"
 import type { Metadata } from "next"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -23,6 +25,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
+          <FloatingTools />
+          <CustomCursor />
         </ThemeProvider>
       </body>
     </html>

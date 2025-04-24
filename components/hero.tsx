@@ -107,9 +107,28 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center cursor-pointer"
+          onClick={() => {
+            const aboutSection = document.querySelector("#about")
+            if (aboutSection) {
+              aboutSection.scrollIntoView({ behavior: "smooth" })
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="Scroll to about section"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              const aboutSection = document.querySelector("#about")
+              if (aboutSection) {
+                aboutSection.scrollIntoView({ behavior: "smooth" })
+              }
+            }
+          }}
         >
-          <p className="text-sm text-muted-foreground mb-2">Scroll to learn more</p>
+          <p className="text-sm text-muted-foreground mb-2 hover:text-primary transition-colors">
+            Scroll to learn more
+          </p>
           <ArrowDown className="h-5 w-5 mx-auto animate-bounce" />
         </motion.div>
       </div>
