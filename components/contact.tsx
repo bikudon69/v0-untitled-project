@@ -7,6 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, Phone, Calendar, Github, Linkedin, Twitter } from "lucide-react"
 
 export default function Contact() {
+  const handleScheduleConsultation = () => {
+    window.open(
+      "mailto:bikulinuxer@gmail.com?subject=DevOps%20Consultation%20Request&body=Hi%20Biku,%0A%0AI'd%20like%20to%20schedule%20a%20consultation%20to%20discuss%20my%20DevOps%20needs.%0A%0ABest%20regards,",
+      "_blank",
+    )
+  }
+
   return (
     <section id="contact" className="py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
@@ -121,7 +128,7 @@ export default function Contact() {
                 </div>
 
                 <div className="mt-8 flex justify-center">
-                  <Button size="lg" className="px-8" onClick={() => window.open("https://calendly.com", "_blank")}>
+                  <Button size="lg" className="px-8" onClick={handleScheduleConsultation}>
                     Schedule a Consultation
                   </Button>
                 </div>

@@ -5,6 +5,7 @@ import Achievements from "@/components/achievements"
 import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
+import TerminalExperience from "@/components/terminal-experience"
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <About />
         <Services />
         <Achievements />
+        <TerminalExperience />
         <Contact />
       </main>
       <Footer />
