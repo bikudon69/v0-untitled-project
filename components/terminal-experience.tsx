@@ -25,6 +25,18 @@ export default function TerminalExperience() {
   const inputRef = useRef<HTMLInputElement>(null)
   const terminalRef = useRef<HTMLDivElement>(null)
 
+  useEffect(() => {
+    // Prevent this component from stealing focus on initial load
+    const preventInitialFocus = () => {
+      if (!sessionStorage.getItem("pageLoaded")) {
+        sessionStorage.setItem("pageLoaded", "true")
+        window.scrollTo(0, 0)
+      }
+    }
+
+    preventInitialFocus()
+  }, [])
+
   // Auto-scroll to bottom when history changes
   useEffect(() => {
     if (terminalRef.current) {
@@ -32,10 +44,24 @@ export default function TerminalExperience() {
     }
   }, [history])
 
-  // Auto-focus input when component mounts
+  // Only focus input when user interacts with the terminal
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus()
+    // Don't auto-focus on initial page load
+    const handleTerminalClick = () => {
+      if (inputRef.current) {
+        inputRef.current.focus()
+      }
+    }
+
+    const terminalElement = terminalRef.current
+    if (terminalElement) {
+      terminalElement.addEventListener("click", handleTerminalClick)
+    }
+
+    return () => {
+      if (terminalElement) {
+        terminalElement.removeEventListener("click", handleTerminalClick)
+      }
     }
   }, [])
 
@@ -301,7 +327,7 @@ export default function TerminalExperience() {
   }
 
   return (
-    <section id="terminal" className="py-16 md:py-24 bg-muted/30">
+    <section id="terminal-experience" className="py-16 md:py-24 bg-muted/30">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
