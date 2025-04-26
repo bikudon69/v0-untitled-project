@@ -45,28 +45,24 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-primary/5 rounded-2xl transform -rotate-3" />
               <div className="absolute inset-0 bg-gradient-to-bl from-primary/10 to-background/80 rounded-2xl transform rotate-3" />
               <div className="relative h-full w-full overflow-hidden rounded-xl border shadow-xl">
+                {/* Fallback placeholder shown while image loads */}
+                <div className="absolute inset-0 flex items-center justify-center bg-muted">
+                  <span className="text-muted-foreground">Loading profile image...</span>
+                </div>
                 <Image
                   src="/images/biku-portrait.png"
                   alt="Biku Shah - DevOps Solution Architect"
                   width={600}
                   height={600}
-                  className="object-cover h-full w-full"
+                  className="object-cover h-full w-full relative z-10"
                   priority
+                  onError={(e) => {
+                    // Fallback to a placeholder if the image fails to load
+                    const target = e.target as HTMLImageElement
+                    target.src = "https://via.placeholder.com/600x600?text=Biku+Shah"
+                    target.onerror = null // Prevent infinite loop if placeholder also fails
+                  }}
                 />
-              </div>
-
-              {/* Certification Badge Overlay */}
-              <div className="absolute -right-4 -bottom-4 bg-background/80 backdrop-blur-sm border rounded-lg p-3 shadow-lg">
-                <div className="flex gap-2">
-                  <div className="w-12 h-12 relative flex items-center justify-center bg-white rounded-full p-1">
-                    <svg viewBox="0 0 24 24" width="32" height="32" className="text-[#FF9900]">
-                      <path
-                        fill="currentColor"
-                        d="M18.7 10.2c0-.7 0-1.3-.1-1.9 0-.1 0-.2-.1-.3 0-.1-.1-.2-.1-.3 0-.1-.1-.2-.1-.3-.1-.1-.1-.2-.2-.3-.1-.1-.1-.2-.2-.2-.1-.1-.1-.1-.2-.2-.1-.1-.2-.1-.3-.2-.1 0-.2-.1-.3-.1-.1 0-.2-.1-.4-.1-.1 0-.3 0-.4-.1-.3 0-.7-.1-1.1-.1-.4 0-.8 0-1.3.1h-.1c-.4 0-.9.1-1.3.2-.1 0-.2.1-.3.1-.1 0-.2.1-.3.1-.1 0-.2.1-.3.1-.1 0-.2.1-.3.2-.1.1-.2.1-.2.2-.1.1-.1.1-.2.2-.1.1-.1.2-.2.3-.1.1-.1.2-.1.3 0 .1-.1.2-.1.3 0 .1 0 .2-.1.3 0 .6-.1 1.2-.1 1.9 0 .7 0 1.3.1 1.9 0 .1 0 .2.1.3 0 .1.1.2.1.3 0 .1.1.2.1.3.1.1.1.2.2.3.1.1.1.2.2.2.1.1.1.1.2.2.1.1.2.1.3.2.1 0 .2.1.3.1.1 0 .2.1.3.1.1 0 .2.1.3.1.4.1.9.1 1.3.2h.1c.5 0 .9.1 1.3.1.4 0 .8 0 1.1-.1.1 0 .3 0 .4-.1.1 0 .3 0 .4-.1.1 0 .2-.1.3-.1.1 0 .2-.1.3-.2.1-.1.2-.1.2-.2.1-.1.1-.1.2-.2.1-.1.1-.2.2-.2.1-.1.1-.2.2-.3 0-.1.1-.2.1-.3 0-.1.1-.2.1-.3 0-.1 0-.2.1-.3 0-.6.1-1.2.1-1.9zm-8.8-4.7c.9-.1 1.3-.1 1.8-.1.5 0 1 0 1.8.1 0 .1.1.3.1.5.1.5.1 1.1.1 1.9 0 .7 0 1.3-.1 1.8 0 .2-.1.4-.1.5-.8.1-1.3.1-1.8.1-.6 0-1.1 0-1.8-.1 0-.1-.1-.3-.1-.5-.1-.5-.1-1.1-.1-1.8 0-.8 0-1.4.1-1.9 0-.2 0-.4.1-.5zm-3.9 4.7c0-.7 0-1.3.1-1.9 0-.1 0-.2.1-.3 0-.1.1-.2.1-.3 0-.1.1-.2.1-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.2.1-.1.1-.1.2-.2.1-.1.2-.1.3-.2.1 0 .2-.1.3-.1.1 0 .2-.1.3-.1.1 0 .2-.1.3-.1.4-.1.9-.1 1.3-.2h.1c.2 0 .4 0 .5-.1.1.2.1.4.1.7.1.5.1 1.2.1 2 0 .8 0 1.4-.1 2 0 .3-.1.5-.1.7-.2 0-.4 0-.6 0h-.1c-.4 0-.9-.1-1.3-.2-.1 0-.2-.1-.3-.1-.1 0-.2-.1-.3-.1-.1 0-.2-.1-.3-.1-.1 0-.2-.1-.3-.2-.1-.1-.2-.1-.2-.2-.1-.1-.1-.1-.2-.2-.1-.1-.1-.2-.2-.3-.1-.1-.1-.2-.1-.3 0-.1-.1-.2-.1-.3 0-.1 0-.2-.1-.3.1-.6 0-1.2 0-1.9zm8.8 5.6c-.9.1-1.3.1-1.8.1-.5 0-1 0-1.8-.1 0-.1-.1-.3-.1-.5-.1-.5-.1-1.1-.1-1.9 0-.7 0-1.3.1-1.8 0-.2.1-.4.1-.5.8-.1 1.3-.1 1.8-.1.6 0 1.1 0 1.8.1 0 .1.1.3.1.5.1.5.1 1.1.1 1.8 0 .8 0 1.4-.1 1.9 0 .2 0 .4-.1.5zm3.8-5.6c0 .7 0 1.3-.1 1.9 0 .1 0 .2-.1.3 0 .1-.1.2-.1.3 0 .1-.1.2-.1.3-.1.1-.1.2-.2.3-.1.1-.1.2-.2.2-.1.1-.1.1-.2.2-.1.1-.2.1-.3.2-.1 0-.2.1-.3.1-.1 0-.2.1-.3.1-.1 0-.2.1-.3.1-.4.1-.9.1-1.3.2h-.1c-.2 0-.4 0-.6 0 0-.2-.1-.4-.1-.7-.1-.5-.1-1.2-.1-2 0-.8 0-1.4.1-2 0-.3.1-.5.1-.7.2 0 .4 0 .5 0h.1c.4 0 .9.1 1.3.2.1 0 .2.1.3.1.1 0 .2.1.3.1.1 0 .2.1.3.1.1 0 .2.1.3.2.1.1.2.1.2.2.1.1.1.1.2.2.1.1.1.2.2.3.1.1.1.2.1.3 0 .1.1.2.1.3 0 .1 0 .2.1.3 0 .6 0 1.2 0 1.9zM12 21.7c-5.4 0-9.7-4.3-9.7-9.7S6.6 2.3 12 2.3s9.7 4.3 9.7 9.7-4.3 9.7-9.7 9.7zm0-20C6.1 1.7 1.3 6.5 1.3 12S6.1 22.3 12 22.3 22.7 17.5 22.7 12 17.9 1.7 12 1.7z"
-                      />
-                    </svg>
-                  </div>
-                </div>
               </div>
             </div>
           </motion.div>
